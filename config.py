@@ -29,7 +29,7 @@ FORCE_PIC = os.environ.get("FORCE_PIC", "https://telegra.ph/file/e292b12890b8b4b
 
 #--------------------------------------------
 SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "linkshortify.com")
-SHORTLINK_API = os.environ.get("SHORTLINK_API", "")
+SHORTLINK_API = os.environ.get("SHORTLINK_API", "7ec0f6c62f20266998ba5a7ae16a1e1095cad590")
 TUT_VID = os.environ.get("TUT_VID","https://t.me/hwdownload/3")
 SHORT_MSG = "<b>⌯ Here is Your Download Link, Must Watch Tutorial Before Clicking On Download...</b>"
 
