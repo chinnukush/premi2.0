@@ -38,7 +38,7 @@ async def short_url(client: Client, message: Message, base64_string):
         ]
 
         await message.reply_photo(
-            photo=SHORTENER_PIC,
+            protect_content=True,
             caption=SHORT_MSG.format(
             ),
             reply_markup=InlineKeyboardMarkup(buttons),
