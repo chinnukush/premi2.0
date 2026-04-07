@@ -34,9 +34,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             text=START_MSG.format(first=query.from_user.first_name),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("ᴘʀᴇᴍɪᴜᴍ", callback_data='premium')]
-            ])
-        )
+                [InlineKeyboardButton(' 📢 ɪᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ', url='https://t.me/hari_moviez')
+             ],
+                [InlineKeyboardButton('🔍 ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇꜱᴛ ɢʀᴏᴜᴘ 𝟷', url='https://t.me/iPopcornMoviesGroups'),
+                 InlineKeyboardButton('🧭 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ', url='https://t.me/+WQbEWONPmgA3ZDA1')]]))
 
     elif data == "premium":
         await query.message.delete()
@@ -131,5 +132,3 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             "sᴇʟᴇᴄᴛ ᴀ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴛᴏɢɢʟᴇ ɪᴛs ғᴏʀᴄᴇ-sᴜʙ ᴍᴏᴅᴇ:",
             reply_markup=InlineKeyboardMarkup(buttons)
         )
-
-
