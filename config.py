@@ -6,39 +6,39 @@ from logging.handlers import RotatingFileHandler
 
 #--------------------------------------------
 #Bot token @Botfather
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8305589280:AAFJN1RILEFd-QQCLutcqWuepXiPjGXcBJk")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8675260165:AAEMVvG8I84NwZIpqWN3BUKrG3hCFBVZfYc")
 APP_ID = int(os.environ.get("APP_ID", "15671595")) #Your API ID from my.telegram.org
 API_HASH = os.environ.get("API_HASH", "bb8f36f9c39a24c7f8b2acbc7ea8c60a") #Your API Hash from my.telegram.org
 #--------------------------------------------
 
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002082701021")) #Your db channel Id
-OWNER = os.environ.get("OWNER", "CZ_owner") # Owner username without @
-OWNER_ID = int(os.environ.get("OWNER_ID", "8075224687")) # Owner id
+OWNER = os.environ.get("OWNER", "Kushalhk1") # Owner username without @
+OWNER_ID = int(os.environ.get("OWNER_ID", "8363515444")) # Owner id
 #--------------------------------------------
 PORT = os.environ.get("PORT", "8001")
 #--------------------------------------------
-DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://anikush8310:4wTqyEhgZh96x0GV@cluster0.n1clhjc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://kyt43843_db_user:33yCZu3piNSvvllC@cluster0.e2eqsl7.mongodb.net/?appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "Cluooo")
 #--------------------------------------------
 FSUB_LINK_EXPIRY = int(os.getenv("FSUB_LINK_EXPIRY", "0"))  # 0 means no expiry
-BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/Harikushal")
+BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/Kushalhk1")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "200"))
 #--------------------------------------------
-START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/hJVcT9rH/image.jpg")
-FORCE_PIC = os.environ.get("FORCE_PIC", "https://image.zaw-myo.workers.dev/image/b6355d90-fdfb-42bb-af84-936644899992")
+START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/rR8z50BC/photo-2026-03-10-05-24-18-7625995582607196164.jpg https://i.ibb.co/wNSHx4MN/photo-2026-03-19-11-09-11-7625995956269350928.jpg")
+FORCE_PIC = os.environ.get("FORCE_PIC", "https://i.ibb.co/fY2yvdhP/photo-2026-04-07-12-40-55-7625996437305688068.jpg")
 
 #--------------------------------------------
-SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "linkshortify.com")
-SHORTLINK_API = os.environ.get("SHORTLINK_API", "7ec0f6c62f20266998ba5a7ae16a1e1095cad590")
-TUT_VID = os.environ.get("TUT_VID","https://t.me/HK_How_To_Open/1935")
+SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "")
+SHORTLINK_API = os.environ.get("SHORTLINK_API", "")
+TUT_VID = os.environ.get("TUT_VID","")
 SHORT_MSG = "<b>⌯ ʜᴇʀᴇ ɪꜱ ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ, ᴍᴜꜱᴛ ᴡᴀᴛᴄʜ ᴛᴜᴛᴏʀɪᴀʟ ʙᴇғᴏʀᴇ ᴄʟɪᴄᴋɪɴɢ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ......</b>"
 
-SHORTENER_PIC = os.environ.get("SHORTENER_PIC", "https://image.zaw-myo.workers.dev/image/809ae7d0-67bd-42f7-bc45-4c820fc0266a")
+SHORTENER_PIC = os.environ.get("SHORTENER_PIC", "https://i.ibb.co/W4jQStcG/photo-2026-04-07-13-09-17-7626003747340025860.jpg")
 #--------------------------------------------
 
 #--------------------------------------------
 HELP_TXT = "<b><blockquote>ᴛʜɪs ɪs ᴀɴ ғɪʟᴇ ᴛᴏ ʟɪɴᴋ ʙᴏᴛ ᴡᴏʀᴋ ғᴏʀ @TG_Bots_Support\n\n❏ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs\n├/start : sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ\n├/about : ᴏᴜʀ Iɴғᴏʀᴍᴀᴛɪᴏɴ\n└/help : ʜᴇʟᴘ ʀᴇʟᴀᴛᴇᴅ ʙᴏᴛ\n\n sɪᴍᴘʟʏ ᴄʟɪᴄᴋ ᴏɴ ʟɪɴᴋ ᴀɴᴅ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴊᴏɪɴ ʙᴏᴛʜ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ ᴛʜᴀᴛs ɪᴛ.....!\n\n ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ <a href=https://t.me/Harikushal>Kushal</a></blockquote></b>"
-ABOUT_TXT = "<b><blockquote>◈ ᴄʀᴇᴀᴛᴏʀ: <a href=https://t.me/TG_Bots_Support>Kannada Backup</a>\n◈ ꜰᴏᴜɴᴅᴇʀ ᴏꜰ : <a href=https://t.me/TG_BOTS_UPDATE>ʜᴋ ᴄʜᴀɴɴᴇʟ ɴᴇᴛᴡᴏʀᴋ</a></blockquote></b>"
+ABOUT_TXT = "<b><blockquote>◈ ᴄʀᴇᴀᴛᴏʀ: <a href=https://t.me/Hari_Moviez>Kannada Backup</a>\n◈ ꜰᴏᴜɴᴅᴇʀ ᴏꜰ : <a href=https://t.me/TG_BOTS_UPDATE>ʜᴋ ᴄʜᴀɴɴᴇʟ ɴᴇᴛᴡᴏʀᴋ</a></blockquote></b>"
 #--------------------------------------------
 #--------------------------------------------
 START_MSG = os.environ.get("START_MESSAGE", "<b>ʜᴇʟʟᴏ {mention} 👋\n\n<blockquote> ɪ ᴀᴍ ғɪʟᴇ sᴛᴏʀᴇ ʙᴏᴛ, ɪ ᴄᴀɴ sᴛᴏʀᴇ ᴘʀɪᴠᴀᴛᴇ ғɪʟᴇs ɪɴ sᴘᴇᴄɪғɪᴇᴅ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ᴏᴛʜᴇʀ ᴜsᴇʀs ᴄᴀɴ ᴀᴄᴄᴇss ɪᴛ ғʀᴏᴍ sᴘᴇᴄɪᴀʟ ʟɪɴᴋ.</blockquote></b>")
@@ -79,10 +79,10 @@ USER_REPLY_TEXT = "ʙᴀᴋᴋᴀ ! ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴍʏ ꜱᴇɴᴘ
 
 #==========================(BUY PREMIUM)====================#
 
-OWNER_TAG = os.environ.get("OWNER_TAG", "Harikushal")
-UPI_ID = os.environ.get("UPI_ID", "harikushal@slc")
-QR_PIC = os.environ.get("QR_PIC", "https://i.ibb.co/VcFmGqSF/image.jpg")
-SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"t.me/Harikushal")
+OWNER_TAG = os.environ.get("OWNER_TAG", "Kushalhk1")
+UPI_ID = os.environ.get("UPI_ID", "Not Available")
+QR_PIC = os.environ.get("QR_PIC", "https://i.ibb.co/W4jQStcG/photo-2026-04-07-13-09-17-7626003747340025860.jpg")
+SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"t.me/Kushalhk1")
 #--------------------------------------------
 #Time and its price
 #7 Days
