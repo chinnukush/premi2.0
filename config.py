@@ -33,7 +33,7 @@ SHORTLINK_API = os.environ.get("SHORTLINK_API", "")
 TUT_VID = os.environ.get("TUT_VID","")
 SHORT_MSG = "<b>⌯ ʜᴇʀᴇ ɪꜱ ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ, ᴍᴜꜱᴛ ᴡᴀᴛᴄʜ ᴛᴜᴛᴏʀɪᴀʟ ʙᴇғᴏʀᴇ ᴄʟɪᴄᴋɪɴɢ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ......</b>"
 
-SHORTENER_PIC = os.environ.get("SHORTENER_PIC", "https://i.ibb.co/W4jQStcG/photo-2026-04-07-13-09-17-7626003747340025860.jpg")
+SHORTENER_PIC = os.environ.get("SHORTENER_PIC", "https://repgyetdcodkynrbxocg.supabase.co/storage/v1/object/public/images/telegram-1775705967395-3e4ac987.jpg")
 #--------------------------------------------
 
 #--------------------------------------------
