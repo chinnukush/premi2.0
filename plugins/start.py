@@ -18,9 +18,6 @@ from helper_func import *
 from database.database import *
 from database.db_premium import *
 
-BAN_SUPPORT = f"{BAN_SUPPORT}"
-TUT_VID = f"{TUT_VID}"
-
 
 
 # ================= SHORT LINK ================= #
