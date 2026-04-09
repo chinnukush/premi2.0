@@ -29,39 +29,12 @@ async def safe_send_photo(message, photo, caption, reply_markup=None):
         )
 
 
-# ================= SHORT LINK ================= #
-
-async def short_url(client: Client, message, base64_string):
-    try:
-        prem_link = f"https://t.me/{client.username}?start=yu3elk{base64_string}7"
-        short_link = await get_shortlink(SHORTLINK_URL, SHORTLINK_API, prem_link)
-
-        buttons = [
-            [
-                InlineKeyboardButton("Download", url=short_link),
-                InlineKeyboardButton("Tutorial", url=TUT_VID)
-            ],
-            [InlineKeyboardButton("Premium", callback_data="premium")]
-        ]
-
-        await safe_send_photo(
-            message,
-            SHORTENER_PIC,
-            SHORT_MSG,
-            InlineKeyboardMarkup(buttons)
-        )
-
-    except Exception as e:
-        print("Shortlink Error:", e)
-
-
 # ================= START ================= #
 
 @Bot.on_message(filters.command("start") & filters.private)
 async def start_command(client: Client, message):
 
     user_id = message.from_user.id
-    is_premium = await is_premium_user(user_id)
 
     # Add user
     if not await db.present_user(user_id):
@@ -89,25 +62,24 @@ async def start_command(client: Client, message):
     # ================= PAYLOAD ================= #
 
     if len(text) > 7:
-    try:
-        data = text.split(" ", 1)[1]
+        try:
+            data = text.split(" ", 1)[1]
+            base64_string = data[6:-1] if data.startswith("yu3elk") else data
 
-        # Extract base64
-        base64_string = data[6:-1] if data.startswith("yu3elk") else data
+        except Exception as e:
+            print("Payload Error:", e)
+            return await message.reply("Invalid link ❌")
 
-    except Exception as e:
-        print("Payload Error:", e)
-        return await message.reply("Invalid link ❌")
+        # Decode
+        try:
+            decoded = await decode(base64_string)
+            args = decoded.split("-")
 
-    # Decode
-    try:
-        decoded = await decode(base64_string)
-        args = decoded.split("-")
-    except Exception as e:
-        print("Decode Error:", e)
-        return await message.reply("Invalid link ❌")
+        except Exception as e:
+            print("Decode Error:", e)
+            return await message.reply("Invalid link ❌")
 
-    ids = []
+        ids = []
 
         try:
             if len(args) == 3:
@@ -117,13 +89,16 @@ async def start_command(client: Client, message):
 
             elif len(args) == 2:
                 ids = [int(int(args[1]) / abs(client.db_channel.id))]
-        except:
+
+        except Exception as e:
+            print("ID Decode Error:", e)
             return await message.reply("Error decoding ❌")
 
         temp = await message.reply("⏳ Please wait...")
 
         try:
             messages = await get_messages(client, ids)
+
         except Exception as e:
             await temp.delete()
             print("Fetch Error:", e)
@@ -134,11 +109,8 @@ async def start_command(client: Client, message):
         sent_msgs = []
 
         for msg in messages:
+            # Skip empty/invalid
             if not msg or not msg.media:
-                continue
-
-            # ✅ FIX 2: skip invalid messages
-            if not (msg.text or msg.caption or msg.photo or msg.video or msg.document or msg.audio):
                 continue
 
             caption = msg.caption.html if msg.caption else ""
@@ -276,4 +248,4 @@ async def commands_cmd(client, message):
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("Close", callback_data="close")]]
         )
-    )
+                )
