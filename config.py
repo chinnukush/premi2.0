@@ -25,7 +25,7 @@ BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/Kushalhk1")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "200"))
 #--------------------------------------------
 START_PIC = os.environ.get("START_PIC", "https://repgyetdcodkynrbxocg.supabase.co/storage/v1/object/public/images/telegram-1775705853880-437bdcab.jpg")
-FORCE_PIC = os.environ.get("FORCE_PIC", "https://i.ibb.co/fY2yvdhP/photo-2026-04-07-12-40-55-7625996437305688068.jpg")
+FORCE_PIC = os.environ.get("FORCE_PIC", "https://repgyetdcodkynrbxocg.supabase.co/storage/v1/object/public/images/telegram-1775705920205-0011c02b.jpg")
 
 #--------------------------------------------
 SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "")
