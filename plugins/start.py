@@ -89,25 +89,25 @@ async def start_command(client: Client, message):
     # ================= PAYLOAD ================= #
 
     if len(text) > 7:
-        try:
-            data = text.split(" ", 1)[1]
-            base64_string = data[6:-1] if data.startswith("yu3elk") else data
+    try:
+        data = text.split(" ", 1)[1]
 
-            if not is_premium and user_id != OWNER_ID and not data.startswith("yu3elk"):
-                return await short_url(client, message, base64_string)
+        # Extract base64
+        base64_string = data[6:-1] if data.startswith("yu3elk") else data
 
-        except Exception as e:
-            print("Payload Error:", e)
-            return await message.reply("Invalid link ❌")
+    except Exception as e:
+        print("Payload Error:", e)
+        return await message.reply("Invalid link ❌")
 
-        # Decode
-        try:
-            decoded = await decode(base64_string)
-            args = decoded.split("-")
-        except:
-            return await message.reply("Invalid link ❌")
+    # Decode
+    try:
+        decoded = await decode(base64_string)
+        args = decoded.split("-")
+    except Exception as e:
+        print("Decode Error:", e)
+        return await message.reply("Invalid link ❌")
 
-        ids = []
+    ids = []
 
         try:
             if len(args) == 3:
@@ -134,9 +134,7 @@ async def start_command(client: Client, message):
         sent_msgs = []
 
         for msg in messages:
-
-            # ✅ FIX 1: skip empty
-            if not msg:
+            if not msg or not msg.media:
                 continue
 
             # ✅ FIX 2: skip invalid messages
