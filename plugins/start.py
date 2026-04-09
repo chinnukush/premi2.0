@@ -1,17 +1,10 @@
 import asyncio
-import os
-import random
-import sys
-import re
-import string 
-import string as rohit
-import time
 from datetime import datetime, timedelta
-from pyrogram import Client, filters, __version__
-from pyrogram.enums import ParseMode, ChatAction
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ReplyKeyboardMarkup, ChatInviteLink, ChatPrivileges
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
-from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserNotParticipant
+from pyrogram import Client, filters
+from pyrogram.enums import ParseMode
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import FloodWait
+
 from bot import Bot
 from config import *
 from helper_func import *
@@ -19,26 +12,43 @@ from database.database import *
 from database.db_premium import *
 
 
+# ================= SAFE PHOTO ================= #
+
+async def safe_send_photo(message, photo, caption, reply_markup=None):
+    try:
+        return await message.reply_photo(
+            photo=photo,
+            caption=caption,
+            reply_markup=reply_markup
+        )
+    except Exception as e:
+        print("Photo Error:", e)
+        return await message.reply_text(
+            caption,
+            reply_markup=reply_markup
+        )
+
 
 # ================= SHORT LINK ================= #
 
-async def short_url(client: Client, message: Message, base64_string):
+async def short_url(client: Client, message, base64_string):
     try:
         prem_link = f"https://t.me/{client.username}?start=yu3elk{base64_string}7"
         short_link = await get_shortlink(SHORTLINK_URL, SHORTLINK_API, prem_link)
 
         buttons = [
             [
-                InlineKeyboardButton("ᴅᴏᴡɴʟᴏᴀᴅ", url=short_link),
-                InlineKeyboardButton("ᴛᴜᴛᴏʀɪᴀʟ", url=TUT_VID)
+                InlineKeyboardButton("Download", url=short_link),
+                InlineKeyboardButton("Tutorial", url=TUT_VID)
             ],
-            [InlineKeyboardButton("ᴘʀᴇᴍɪᴜᴍ", callback_data="premium")]
+            [InlineKeyboardButton("Premium", callback_data="premium")]
         ]
 
-        await message.reply_photo(
-            photo=SHORTENER_PIC,  # ⚠️ MUST BE file_id
-            caption=SHORT_MSG,
-            reply_markup=InlineKeyboardMarkup(buttons)
+        await safe_send_photo(
+            message,
+            SHORTENER_PIC,
+            SHORT_MSG,
+            InlineKeyboardMarkup(buttons)
         )
 
     except Exception as e:
@@ -48,7 +58,7 @@ async def short_url(client: Client, message: Message, base64_string):
 # ================= START ================= #
 
 @Bot.on_message(filters.command("start") & filters.private)
-async def start_command(client: Client, message: Message):
+async def start_command(client: Client, message):
 
     user_id = message.from_user.id
     is_premium = await is_premium_user(user_id)
@@ -60,7 +70,7 @@ async def start_command(client: Client, message: Message):
         except:
             pass
 
-    # Force sub check
+    # Force Sub
     if not await is_subscribed(client, user_id):
         return await not_joined(client, message)
 
@@ -81,7 +91,6 @@ async def start_command(client: Client, message: Message):
     if len(text) > 7:
         try:
             data = text.split(" ", 1)[1]
-
             base64_string = data[6:-1] if data.startswith("yu3elk") else data
 
             if not is_premium and user_id != OWNER_ID and not data.startswith("yu3elk"):
@@ -89,7 +98,7 @@ async def start_command(client: Client, message: Message):
 
         except Exception as e:
             print("Payload Error:", e)
-            return
+            return await message.reply("Invalid link ❌")
 
         # Decode
         try:
@@ -117,6 +126,7 @@ async def start_command(client: Client, message: Message):
             messages = await get_messages(client, ids)
         except Exception as e:
             await temp.delete()
+            print("Fetch Error:", e)
             return await message.reply("Error fetching files ❌")
 
         await temp.delete()
@@ -124,6 +134,15 @@ async def start_command(client: Client, message: Message):
         sent_msgs = []
 
         for msg in messages:
+
+            # ✅ FIX 1: skip empty
+            if not msg:
+                continue
+
+            # ✅ FIX 2: skip invalid messages
+            if not (msg.text or msg.caption or msg.photo or msg.video or msg.document or msg.audio):
+                continue
+
             caption = msg.caption.html if msg.caption else ""
             caption += f"\n\n{CUSTOM_CAPTION}" if CUSTOM_CAPTION else ""
 
@@ -140,8 +159,13 @@ async def start_command(client: Client, message: Message):
             except FloodWait as e:
                 await asyncio.sleep(e.x)
 
-        # AUTO DELETE
-        if FILE_AUTO_DELETE > 0:
+            except Exception as e:
+                print("Copy Error:", e)
+                continue
+
+        # ================= AUTO DELETE ================= #
+
+        if FILE_AUTO_DELETE > 0 and sent_msgs:
             notify = await message.reply(
                 f"⚠️ File will delete in {get_exp_time(FILE_AUTO_DELETE)}"
             )
@@ -156,6 +180,7 @@ async def start_command(client: Client, message: Message):
 
             try:
                 reload_url = f"https://t.me/{client.username}?start={message.command[1]}"
+
                 await notify.edit(
                     "✅ File deleted. Click below to get again",
                     reply_markup=InlineKeyboardMarkup(
@@ -165,15 +190,17 @@ async def start_command(client: Client, message: Message):
             except:
                 pass
 
+        elif not sent_msgs:
+            await message.reply("❌ No valid files found.")
+
     # ================= NORMAL START ================= #
 
     else:
-        await message.reply_photo(
-            photo=START_PIC,  # ⚠️ MUST BE file_id
-            caption=START_MSG.format(
-                mention=message.from_user.mention
-            ),
-            reply_markup=InlineKeyboardMarkup(
+        await safe_send_photo(
+            message,
+            START_PIC,
+            START_MSG.format(mention=message.from_user.mention),
+            InlineKeyboardMarkup(
                 [[InlineKeyboardButton("Support", url=BAN_SUPPORT)]]
             )
         )
@@ -183,7 +210,7 @@ async def start_command(client: Client, message: Message):
 
 chat_data_cache = {}
 
-async def not_joined(client: Client, message: Message):
+async def not_joined(client: Client, message):
     temp = await message.reply("Checking subscription...")
 
     user_id = message.from_user.id
@@ -218,10 +245,11 @@ async def not_joined(client: Client, message: Message):
             )
         ])
 
-        await message.reply_photo(
-            photo=FORCE_PIC,  # ⚠️ MUST BE file_id
-            caption=FORCE_MSG.format(mention=message.from_user.mention),
-            reply_markup=InlineKeyboardMarkup(buttons)
+        await safe_send_photo(
+            message,
+            FORCE_PIC,
+            FORCE_MSG.format(mention=message.from_user.mention),
+            InlineKeyboardMarkup(buttons)
         )
 
         await temp.delete()
@@ -230,7 +258,7 @@ async def not_joined(client: Client, message: Message):
         print("ForceSub Error:", e)
 
 
-# ================= PREMIUM ================= #
+# ================= OTHER ================= #
 
 @Bot.on_message(filters.command("myplan") & filters.private)
 async def myplan(client, message):
