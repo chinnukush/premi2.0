@@ -12,7 +12,7 @@ API_HASH = os.environ.get("API_HASH", "bb8f36f9c39a24c7f8b2acbc7ea8c60a") #Your 
 #--------------------------------------------
 
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1003224239956")) #Your db channel Id
-OWNER = os.environ.get("OWNER", "Kushalhk1") # Owner username without @
+OWNER = os.environ.get("OWNER", "Harikushal_contactx_bot") # Owner username without @
 OWNER_ID = int(os.environ.get("OWNER_ID", "8363515444")) # Owner id
 #--------------------------------------------
 PORT = os.environ.get("PORT", "8001")
@@ -79,10 +79,10 @@ USER_REPLY_TEXT = "ʙᴀᴋᴋᴀ ! ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴍʏ ꜱᴇɴᴘ
 
 #==========================(BUY PREMIUM)====================#
 
-OWNER_TAG = os.environ.get("OWNER_TAG", "Kushalhk1")
+OWNER_TAG = os.environ.get("OWNER_TAG", "Harikushal_contactx_bot")
 UPI_ID = os.environ.get("UPI_ID", "Not Available")
 QR_PIC = os.environ.get("QR_PIC", "https://i.ibb.co/W4jQStcG/photo-2026-04-07-13-09-17-7626003747340025860.jpg")
-SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"t.me/Kushalhk1")
+SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"t.me/Harikushal_contactx_bot")
 #--------------------------------------------
 #Time and its price
 #7 Days
